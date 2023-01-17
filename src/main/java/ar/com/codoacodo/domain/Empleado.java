@@ -4,10 +4,12 @@ public class Empleado {
 	private int dni;
 	private String nombre;
 	private String apellido;
-	private Departamento dpto;
+	private int departamento;
 	
-	public Empleado() {
-		
+	public Empleado(int dni, String nombre, String apellido, int departamento) {
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.departamento = departamento;
 	}
 	
 	public int getDni() {
@@ -34,12 +36,12 @@ public class Empleado {
 		this.apellido = apellido;
 	}
 
-	public Departamento getDpto() {
-		return dpto;
+	public int getDepartamento() {
+		return departamento;
 	}
 
-	public void setDpto(Departamento dpto) {
-		this.dpto = dpto;
+	public void setDepartamento(int departamento) {
+		this.departamento = departamento;
 	}
 	
 	@Override

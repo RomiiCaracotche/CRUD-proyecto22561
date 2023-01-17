@@ -26,5 +26,6 @@ public interface DepartamentoDAO {
 	public void create (Departamento dpto) throws Exception;
 
 	
-	//crear un metodo que busque por nombre de dpto y devuelva una lista
+	//select * from departamentos where titulo like '%clave%' 
+    public List<Departamento> search(String clave) throws Exception;
 }

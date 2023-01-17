@@ -10,35 +10,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ar.com.codoacodo.DAO.DepartamentoDAO;
+import ar.com.codoacodo.DAO.EmpleadoDAO;
 import ar.com.codoacodo.DAO.implement.DepartamentoDAOImpl;
+import ar.com.codoacodo.DAO.implement.EmpleadoDAOImpl;
 
-@WebServlet("/DeleteDepartamentoController")
-public class DeleteDepartamentoController extends HttpServlet{
-
+@WebServlet("/DeleteEmpleadoController")
+public class DeleteEmpleadoController extends HttpServlet {
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.print("estoy en el get");
-		System.out.print(req.getParameter("idDepto"));
-		int id = Integer.parseInt(req.getParameter("idDepto"));
-		System.out.print(id);
-		//interface = new class que implementa la interface
-		DepartamentoDAO dao = new DepartamentoDAOImpl();
+
+		int dni = Integer.parseInt(req.getParameter("dni"));
+		EmpleadoDAO dao = new EmpleadoDAOImpl();
 		
-		//eliminar
 		try {
-			dao.delete(id);
-			//mensaje de exito
-			req.setAttribute("success", List.of("Se he eliminado el producto con id:" + id));
+			dao.delete(dni);
+			req.setAttribute("success", List.of("Se he eliminado el producto con id:" + dni));
 		} catch (Exception e) {
 			e.printStackTrace();
-			//mensaje de error
 			req.setAttribute("erorrs", List.of("NO se he eliminado el producto :" + e.getMessage()));
-		}//ctrl+t
+		}
 		
-		//ahora redirect!!!!
-		getServletContext().getRequestDispatcher("/FindAllDepartamentoController").forward(req, resp);
-		
+		getServletContext().getRequestDispatcher("/FindAllEmpleadoController").forward(req, resp);
 		
 	}
+
 
 }

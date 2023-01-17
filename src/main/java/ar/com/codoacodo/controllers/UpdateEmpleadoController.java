@@ -21,19 +21,22 @@ public class UpdateEmpleadoController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		int dni = Integer.parseInt(req.getParameter("dni"));
 		String nombre= req.getParameter("nombre");
 		String apellido = req.getParameter("apellido");
 		int departamento = Integer.parseInt(req.getParameter("departamento"));
-
+		
 		EmpleadoDAO dao = new EmpleadoDAOImpl();
 		Empleado emp = new Empleado(dni, nombre, apellido, departamento);
 		
 		try { 
 			dao.update(emp);
+			System.out.print("Empleado con dni:" + emp.getDni() + " actualizado correctamente");
 			req.setAttribute("success", List.of("Empleado con dni:" + emp.getDni() + " actualizado correctamente"));
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.print("Error actualizando Empleados" + e.getMessage());
 			req.setAttribute("errors", List.of("Error actualizando Empleados" + e.getMessage()));
 		}
 		
@@ -46,16 +49,20 @@ public class UpdateEmpleadoController extends HttpServlet {
 	//cargar el departamento y enviarlo a la jsp que va a editar los datos
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			int dni = Integer.parseInt(req.getParameter("dni"));
+			
 			EmpleadoDAO dao = new EmpleadoDAOImpl();	
 			Empleado emp = null;
-
+			DepartamentoDAO dao_dpto = new DepartamentoDAOImpl();
+			List<Departamento> listaDepartamentos = null;
+			
 			try {
+				listaDepartamentos = dao_dpto.findAll();
 				emp = dao.getByDni(dni);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
 			req.setAttribute("empleado", emp);
+			req.setAttribute("listaDepartamentos", listaDepartamentos);
 		    getServletContext().getRequestDispatcher("/editarEmpleado.jsp").forward(req, resp);
 		}
 

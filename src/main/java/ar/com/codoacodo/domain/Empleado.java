@@ -7,6 +7,7 @@ public class Empleado {
 	private int departamento;
 	
 	public Empleado(int dni, String nombre, String apellido, int departamento) {
+		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.departamento = departamento;

@@ -41,7 +41,7 @@ public class DepartamentoDAOImpl implements DepartamentoDAO {
 			return new Departamento(idBd, nombreBd, presupuestoBd);
 			
 		}
-		cerrar(connection);
+		connection.close();
 		return null; // si no hay resultset entonces no devuelve nada
 	}
 
@@ -73,7 +73,7 @@ public class DepartamentoDAOImpl implements DepartamentoDAO {
 			departamentos.add(d);
 					
 			}
-			cerrar(connection);
+			connection.close();
 		   // devolvemos departamentos		
 		   return departamentos; //
 	}
@@ -83,11 +83,11 @@ public class DepartamentoDAOImpl implements DepartamentoDAO {
 	   //-1 necesito la conection a la base
 		Connection connection = AdministradorDeConexion.getConection();
 		//2 - arma el statement
-	     String sql = "DELETE FROM departamentos WHERE ID=" + id;
+	     String sql = "DELETE FROM departamentos WHERE ID=" +id;
 	 	 Statement statement  = connection.createStatement();
 	 	//3 -devuelve un entero devuelve 1 o 0, pero no hace falta confirmar para este caso 
 		  statement.executeUpdate(sql);
-		  cerrar(connection);
+		  connection.close();
 		 
 	}
 
@@ -102,11 +102,11 @@ public class DepartamentoDAOImpl implements DepartamentoDAO {
 		 PreparedStatement statement  = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 	     statement.setString(1,depto.getNombre());
 		 statement.setDouble(2,depto.getPresupuesto());
-		 statement.setLong(3,depto.getId());
+		 statement.setInt(3,depto.getId());
 		//3 -devuelve un entero devuelve 1 o 0, pero no hace falta confirmar para este caso 
 		 statement.execute();
 		
-		 cerrar(connection);
+		 connection.close();
 	}
 
 	@Override
@@ -128,7 +128,7 @@ public class DepartamentoDAOImpl implements DepartamentoDAO {
 		 if (res.next()) {
 			 System.out.println("Se creo el departamento correctamente");
 		 }
-		 cerrar(connection);
+		 connection.close();
 	}
 	
 	@Override
@@ -154,7 +154,7 @@ public class DepartamentoDAOImpl implements DepartamentoDAO {
 			depto.add(this.crearDepto(resultSet));
 		}
 		
-		cerrar(connection);
+		connection.close();
 		
 		return depto;
 	}

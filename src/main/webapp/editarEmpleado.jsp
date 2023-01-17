@@ -1,6 +1,10 @@
 <%@page import="ar.com.codoacodo.domain.Empleado"%>
+<%@page import="ar.com.codoacodo.domain.Departamento"%>
+<%@page import="java.util.List" %>
+
 <%
-	Empleado emp = (Empleado)request.getAttribute("empleado"); // levanto el departamento que viene del controller
+	Empleado emp = (Empleado)request.getAttribute("empleado"); // levanto el empleado que viene del controller
+	List<Departamento> listaDepartamentos = (List<Departamento>)request.getAttribute("listaDepartamentos");
 %>
 
 <!Doctype html>
@@ -21,6 +25,7 @@
 			<h1>Editar Empleado</h1>
 			
 			<form action="<%=request.getContextPath()%>/UpdateEmpleadoController" method="POST">
+			
 					<input type="hidden" name="dni" value="<%=emp.getDni()%>">
 
 					<label for="nombre">Nombre</label>
@@ -30,7 +35,16 @@
 					<input type="text" name="apellido" id="apellido" value="<%=emp.getApellido()%>" required>
 
 					<label for="presupuesto">Departamento</label>
-					<input type="number" name="departamento" id="departamento" value="<%=emp.getDepartamento()%>" required>
+					<select name="departamento" id="departamento" type="number">
+						<option value="<%=emp.getDepartamento()%>"><%=emp.getDepartamento()%></option>
+						
+		  				<% for(Departamento d : listaDepartamentos) { %>
+		  					<% if(d.getId() != emp.getDepartamento()) { %>
+		  						<option value="<%=d.getId()%>"><%=d.getId()%></option>
+		  					<% } %>
+		  				<% } %>
+					</select>
+<%-- 					<input type="number" name="departamento" id="departamento" value="<%=emp.getDepartamento()%>" required> --%>
 					<button type="submit">Editar</button>
 
 			</form>

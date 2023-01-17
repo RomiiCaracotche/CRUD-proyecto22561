@@ -22,12 +22,11 @@ public class CreateEmpleadoController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		
 		int dni = Integer.parseInt(req.getParameter("dni"));
 		String nombre = req.getParameter("nombre");
 		String apellido = req.getParameter("apellido");
 		int departamento = Integer.parseInt(req.getParameter("departamento"));
-		
 		//validaciones
 //		List<String> errores = new ArrayList<>();
 //		if(nombre == null || "".equals(nombre)) {
@@ -48,7 +47,7 @@ public class CreateEmpleadoController extends HttpServlet {
 //			getServletContext().getRequestDispatcher("/nuevoEmpleado.jsp").forward(req, resp);
 //			return;
 //		}
-
+		
 		EmpleadoDAO dao = new EmpleadoDAOImpl();
 		Empleado emp = new Empleado(dni, nombre, apellido, departamento);
 		
@@ -64,4 +63,24 @@ public class CreateEmpleadoController extends HttpServlet {
 		getServletContext().getRequestDispatcher("/FindAllEmpleadoController").forward(req, resp);
 			
 	}
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		DepartamentoDAO dao = new DepartamentoDAOImpl();
+		List<Departamento> listaDepartamentos = null;
+		
+		try {
+			 listaDepartamentos = dao.findAll();
+			 req.setAttribute("listaDepartamentos", listaDepartamentos);
+
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			
+		 }
+
+		getServletContext().getRequestDispatcher("/nuevoEmpleado.jsp").forward(req, resp);
+	}
+	
+	
 }

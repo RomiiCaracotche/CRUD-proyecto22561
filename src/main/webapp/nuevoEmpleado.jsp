@@ -1,3 +1,9 @@
+<%@page import="ar.com.codoacodo.domain.Departamento"%>
+<%@page import="java.util.List" %>
+<%
+	List<Departamento> listaDepartamentos = (List<Departamento>)request.getAttribute("listaDepartamentos");
+%>
+
 <!Doctype html>
 <html>
 <head>
@@ -27,8 +33,18 @@
 		  <label for="presupuesto">apellido</label>
 		  <input type="text" name="apellido" id="apellido" required>
 		  
+<!-- 		  <label for="departamento">Departamento</label> -->
+<!-- 		  <input type="text" name="departamento" id="departamento" required> -->
+		  
 		  <label for="departamento">Departamento</label>
-		  <input type="text" name="departamento" id="departamento" required>
+			<select name="departamento" id="departamento" type="number">
+				<option value="0"></option>
+				
+	 				<% for(Departamento d : listaDepartamentos) { %>
+	 					<option value="<%=d.getId()%>"><%=d.getId()%></option>
+	 					<%System.out.println(d.getId()); %>
+	 				<% } %>
+			</select>
 	
 		  <button type="submit">Crear</button>
 

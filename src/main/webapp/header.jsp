@@ -26,8 +26,9 @@
 		            Empleado
 		          </a>
 		          <ul class="dropdown-menu">
-		            <li><a class="dropdown-item" href="nuevoEmpleado.jsp">Nuevo</a></li>
-		            <li><a class="dropdown-item" href="FindAllEmpleadoController">Listar</a></li>
+<%-- 		            <li><a class="dropdown-item" href="<%=request.getContextPath()%>/nuevoEmpleado.jsp">Nuevo</a></li> --%>
+		            <li><a class="dropdown-item" href="<%=request.getContextPath()%>/CreateEmpleadoController">Nuevo</a></li>
+		            <li><a class="dropdown-item" href="<%=request.getContextPath()%>/FindAllEmpleadoController">Listar</a></li>
 		          </ul>
 	       	</li>
 	       	

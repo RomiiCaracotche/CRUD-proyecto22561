@@ -28,7 +28,7 @@ public class FindAllEmpleadoController extends HttpServlet{
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		req.setAttribute("listadoEmpleados", empleados);
+		req.setAttribute("listaEmpleados", empleados);
 		getServletContext().getRequestDispatcher("/listarEmpleados.jsp").forward(req, resp);
 	}
 	

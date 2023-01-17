@@ -26,9 +26,9 @@
 		      <th scope="col">Departamento</th>
 		    </tr>
 		  </thead>
-		  <% List<Empleado> listadoEmpleados = (List<Empleado>)request.getAttribute("listadoEmpleados"); %>
+		  <% List<Empleado> listaEmpleados = (List<Empleado>)request.getAttribute("listaEmpleados"); %>
 		  <tbody>
-		  	<% for(Empleado e : listadoEmpleados) { %>
+		  	<% for(Empleado e : listaEmpleados) { %>
 		    <tr>
 		      <th scope="row"><%= e.getDni() %></th>
 		      <td><%= e.getNombre() %></td>
@@ -36,7 +36,7 @@
 		      <td><%= e.getDepartamento() %></td>
 		      <td>
 		      
-		      	<a class="" role="button" href="<%=request.getContextPath()%>/UpdateEmpleadoController?id=<%=e.getDni()%>">modificar</a>	 
+		      	<a class="" role="button" href="<%=request.getContextPath()%>/UpdateEmpleadoController?dni=<%=e.getDni()%>">modificar</a>	 
 				<!-- Button trigger modal -->
 									<button type="button" class="btn btn-danger" 
 										data-bs-toggle="modal" 

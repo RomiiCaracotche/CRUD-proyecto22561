@@ -17,18 +17,18 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
 	public Empleado getByDni(int dni)  throws Exception{
 
 		Connection conection = AdministradorDeConexion.getConection();
-		String sql = "select * from empleados where dni = " + dni;
+		String sql = "select * from empleados where dni=" +dni;
 		Statement statement  = conection.createStatement();
 		ResultSet resultset = statement.executeQuery(sql);
 		
 	     // primero verifico si hay datos 
 		
 		if (resultset.next()){
-			int dniBd = resultset.getInt("dni");
-			String nombreBd = resultset.getString("nombre");
-			String apellidoBd = resultset.getString("apellido");
-			int departamentoBd = resultset.getInt("id");
-			return new Empleado(dniBd, nombreBd, apellidoBd, departamentoBd);
+			int dni_ = resultset.getInt("dni");
+			String nombre = resultset.getString("nombre");
+			String apellido = resultset.getString("apellido");
+			int departamento = resultset.getInt("departamento");
+			return new Empleado(dni_, nombre, apellido, departamento);
 			
 		}
 		conection.close();
@@ -46,12 +46,12 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
 		List<Empleado> empleados = new ArrayList<Empleado>();	
 			
 		while (resultset.next()){
-			int dniBd = resultset.getInt("dni");
-			String nombreBd = resultset.getString("nombre");
-			String apellidoBd = resultset.getString("apellido");
-			int departamentoBd = resultset.getInt("departamento");
+			int dni = resultset.getInt("dni");
+			String nombre = resultset.getString("nombre");
+			String apellido = resultset.getString("apellido");
+			int departamento = resultset.getInt("departamento");
 
-			Empleado e = new Empleado(dniBd,nombreBd,apellidoBd, departamentoBd);
+			Empleado e = new Empleado(dni, nombre, apellido, departamento);
 			empleados.add(e);		
 		}
 		conection.close();	
@@ -70,7 +70,8 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
 	@Override
 	public void update(Empleado emp) throws Exception {
 		Connection conection = AdministradorDeConexion.getConection();
-		 String sql = "update empleados set nombre = ?, apellido = ?, departamento = ? where dni= ?"  ;
+		 String sql = "UPDATE empleados SET nombre=?, apellido=?, departamento=? WHERE dni=?";
+		 
 		 PreparedStatement statement  = conection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 		 statement.setString(1,emp.getNombre());
 	     statement.setString(2,emp.getApellido());
@@ -82,9 +83,8 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
 
 	@Override
 	public void create(Empleado emp) throws Exception {
-		
 		Connection conection = AdministradorDeConexion.getConection();
-		 String sql = "insert into empleados (dni, nombre, apellido, departamento) values (?,?,?,?)" ;
+		 String sql = "INSERT INTO empleados (dni, nombre, apellido, departamento) VALUES (?,?,?,?)";
 		 PreparedStatement statement  = conection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
 		 statement.setInt(1,emp.getDni());
 	     statement.setString(2,emp.getNombre());

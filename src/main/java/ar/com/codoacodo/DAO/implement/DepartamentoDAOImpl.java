@@ -133,45 +133,28 @@ public class DepartamentoDAOImpl implements DepartamentoDAO {
 	
 	@Override
 	public List<Departamento> search(String clave) throws Exception {
-		// 1 - necesito la Connection
 		Connection connection = AdministradorDeConexion.getConection();
-
-		// 2 - arma el statement
 		String sql = "SELECT * FROM DEPARTAMENTOS WHERE NOMBRE LIKE ?";
 		PreparedStatement statement = connection.prepareStatement(sql);
 
-		//setear el valor que va en remplazo del ?
 		statement.setString(1, "%" + clave + "%");
-		
-		// 3 - resultset
 		ResultSet resultSet = statement.executeQuery();
 
-		// Interface i = new ClaseQueImplementaLaInterface();
-		List<Departamento> depto = new ArrayList<Departamento>();
+		List<Departamento> departamentos = new ArrayList<Departamento>();
 
-		// verifico si hay datos
 		while (resultSet.next()) {
-			depto.add(this.crearDepto(resultSet));
+			int id = resultSet.getInt("id");
+			String nombre = resultSet.getString("nombre");
+			Double presupuesto = resultSet.getDouble("presupuesto");
+			
+			Departamento dpto = new Departamento(id, nombre, presupuesto);
+			departamentos.add(dpto);
 		}
 		
 		connection.close();
 		
-		return depto;
+		return departamentos;
 	}
 	
-	private void cerrar(Connection con) throws Exception{
-		con.close();
-	}
-	
-	private Departamento crearDepto(ResultSet resultSet) throws Exception {
-		// obtengo el dato del campo id
-		int idDb = resultSet.getInt("id");
-		String nombre = resultSet.getString("nombre");
-		Double presupuesto = resultSet.getDouble("presupuesto");
-	
-		return new Departamento(idDb, nombre, presupuesto);
-	}
-	
-	// implementar el nuevo metodo que busca por el nombre y que devuelve una lista de departamentos
 
 }

@@ -8,6 +8,7 @@ import java.util.List;
 
 import ar.com.codoacodo.DAO.EmpleadoDAO;
 import ar.com.codoacodo.db.AdministradorDeConexion;
+import ar.com.codoacodo.domain.Departamento;
 import ar.com.codoacodo.domain.Empleado;
 
 
@@ -108,24 +109,20 @@ public class EmpleadoDAOImpl implements EmpleadoDAO {
 		ResultSet resultSet = statement.executeQuery();
 
 		List<Empleado> empleados = new ArrayList<Empleado>();
+		
 		while (resultSet.next()) {
-			empleados.add(this.crearEmpleado(resultSet));
+			int dni = resultSet.getInt("dni");
+			String nombre = resultSet.getString("nombre");
+			String apellido = resultSet.getString("apellido");
+			int departamento = resultSet.getInt("departamento");
+			
+			Empleado emp = new Empleado(dni, nombre, apellido, departamento);
+			empleados.add(emp);
 		}
 		
 		conection.close();
 		return empleados;
 	}
 	
-	
-	private Empleado crearEmpleado(ResultSet resultSet) throws Exception {
-		// obtengo el dato del campo id
-		int dniDb = resultSet.getInt("dni");
-		String nombre = resultSet.getString("nombre");
-		String apellido = resultSet.getString("apellido");
-		int departamentoDb = resultSet.getInt("idDpto");
-	
-		return new Empleado(dniDb, nombre, apellido, departamentoDb);
-	}
-
 
 }

@@ -1,0 +1,23 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+
+main{
+	height: calc(100vh - 112px);
+}
+
+.imagen {
+	width:700px;
+	height: auto;
+	object-fit: cover;
+}
+
+.imagen-crud {
+	height: 100%;
+}
+
+.footer {
+	height: 56px;
+}
+

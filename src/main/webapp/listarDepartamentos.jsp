@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page import="ar.com.codoacodo.domain.Departamento" %>
+<%@page import="ar.com.codoacodo.domain.Empleado" %>
 <%@page import="java.util.List" %>
+<%@page import="java.util.HashSet" %>
+
+<% HashSet dptoConEmpleados = (HashSet)request.getAttribute("dptoConEmpleados"); %>
 
 <!DOCTYPE html>
 <html>
@@ -27,6 +31,7 @@
 		    </tr>
 		  </thead>
 		  <% List<Departamento> listadoDepartamentos = (List<Departamento>)request.getAttribute("listadoDepartamentos"); %>
+		
 		  <tbody>
 		  	<% for(Departamento d : listadoDepartamentos) { %>
 		    <tr>
@@ -38,12 +43,11 @@
 		      	<a class="" role="button" href="<%=request.getContextPath()%>/UpdateDepartamentoController?id=<%=d.getId()%>">modificar</a>	 
 				<!--<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="miModal" onclick="sendId(<%=d.getId()%>)">Eliminar</button> -->
 				<!-- Button trigger modal -->
-									<button type="button" class="btn btn-danger" 
-										data-bs-toggle="modal" 
-										data-bs-target="#exampleModal" 
-										onclick="setDepartamentoId(<%=d.getId()%>)">
-									  Eliminar
-									</button>
+				<% if(dptoConEmpleados.contains(d.getId())) { %>
+			        	<button type="button" class="btn btn-danger" onclick="mostrarAlerta()">Eliminar</button>
+			    <% } else {%>
+						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="setDepartamentoId(<%=d.getId()%>)">Eliminar</button>
+				<% } %>
 		      </td>
 		    </tr>
 		    <% } %>
@@ -65,7 +69,7 @@
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-			        <button type="submit" class="btn btn-danger">Eliminar</button>
+			        <button type="submit" class="btn btn-danger" onclick="">Eliminar</button>
 			      </div>
 		    	</form>
 		    </div>
@@ -76,6 +80,10 @@
 	  <script>
 			function setDepartamentoId(id) {
 				document.getElementById('idDepto').value=id;
+			}
+			
+			function mostrarAlerta(){
+				alert("No se puede eliminar este departamento ya que posee empleados a cargo!!!");
 			}
 	  </script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>

@@ -5,6 +5,6 @@
      version="3.0">
   <display-name>Codo a Codo - Java</display-name>
   <welcome-file-list>
-  	<welcome-file>index.jsp</welcome-file>
+  	<welcome-file>proyecto-22561/blob/main/src/main/webapp/index.jsp</welcome-file>
   </welcome-file-list>  
  </web-app>

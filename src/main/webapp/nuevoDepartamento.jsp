@@ -28,7 +28,7 @@
 					
 						<div class="d-flex justify-content-between align-items-center w-75 mb-3">
 							<label for="id" class="col-form-label">ID:</label>
-							<input type="text" name="id" class="form-control-plaintext border border-secondary rounded-3 w-75" id="id" required>
+							<input type="number" name="id" class="form-control-plaintext border border-secondary rounded-3 w-75" id="id" required>
 	  					</div>
 	  					
 	  					<div class="d-flex justify-content-between align-items-center w-75 mb-3">
@@ -38,7 +38,7 @@
 	  					
 	  					<div class="d-flex justify-content-between align-items-center w-75 mb-3">
 						    <label for="presupuesto" class="col-form-label">PRESUPUESTO:</label>
-						    <input type="text" name="presupuesto" class="form-control-plaintext border border-secondary rounded-3 w-75" id="presupuesto" required>
+						    <input type="number" name="presupuesto" class="form-control-plaintext border border-secondary rounded-3 w-75" id="presupuesto" required>
 	  					</div>
 					 
 					 	<button type="submit" class="btn btn-dark w-25">CREAR</button>

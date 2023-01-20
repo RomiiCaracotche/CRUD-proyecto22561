@@ -31,7 +31,7 @@
 					<form class="d-flex flex-column justify-content-center align-items-center" action="<%=request.getContextPath()%>/CreateEmpleadoController" method="post">
 						<div class="d-flex justify-content-between align-items-center w-75 mb-3">
 						    <label for="dni" class="col-form-label">DNI:</label>
-						    <input type="text" name="dni" class="form-control-plaintext border border-secondary rounded-3 w-75" id="dni" required>
+						    <input type="number" name="dni" class="form-control-plaintext border border-secondary rounded-3 w-75" id="dni" required>
 	  					</div>
 	  					
 	  					<div class="d-flex justify-content-between align-items-center w-75 mb-3">

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Lista de Empleados</title>
 <link rel="stylesheet" href="./estilos.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
@@ -22,7 +22,7 @@
 		
 				<div class="d-flex justify-content-center mb-4 w-75"> 
 				    <form class="d-flex" action="<%=request.getContextPath()%>/SearchEmpleadoController">
-					    <input  name="claveBusqueda"  class="form-control me-2" type="search" placeholder="Buscar apellido" aria-label="Search">
+					    <input  name="claveBusqueda"  class="form-control me-2" type="search" placeholder="Buscar por apellido..." aria-label="Search">
 					    <button class="btn btn-secondary" type="submit">Buscar</button>
 				    </form> 
 				    <form class="d-flex ms-2" action="<%=request.getContextPath()%>/FindAllEmpleadoController">

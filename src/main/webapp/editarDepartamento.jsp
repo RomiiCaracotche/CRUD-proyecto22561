@@ -21,7 +21,7 @@
 
 		<main class="d-flex flex-column justify-content-center align-items-center">
 		
-			<div><h1>Modificar Departamento</h1></div>
+			<div><h1>Editar Departamento</h1></div>
 			
 			<div class="h-75 w-100 d-flex justify-content-center align-items-center">
 				<div class="w-75 h-75 d-flex flex-column justify-content-center border border-secondary rounded-3">
